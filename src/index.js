@@ -1,28 +1,26 @@
 import './styles.css';
-import imageCard from './templates/image-card.hbs';
+import refs from './js/refs';
+import fetchImages from './js/fetch-images';
+import renderGallery from './js/render-gallery';
 
-const refs = {
-  gallery: document.querySelector('.gallery'),
-};
+// let page = 1;
+// let perPage = 12;
 
-const BASE_URL = 'https://pixabay.com/api/';
-const apiKey = '19670385-c29ff9f36201f4e7ced09e1e2';
+refs.searchForm.addEventListener('submit', onSubmit);
 
-let page = 1;
-let perPage = 12;
-let query = 'flower';
+function onSubmit(e) {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const inputValue = form.elements.query.value;
 
-fetch(
-  `${BASE_URL}?image_type=photo&orientation=horizontal&q=${query}&page=${page}&per_page=${perPage}&key=${apiKey}`,
-)
-  .then(res => res.json())
-  .then(({ hits }) => {
-    const markup = imageCard(hits);
-    refs.gallery.innerHTML = markup;
-    // console.log(hits);
-  });
+  if (!inputValue) {
+    return;
+  }
 
-// function renderGallery(data) {
-//   const markup = imageCard(data.hits);
-//   refs.gallery.insertAdjacentHTML = markup;
-// }
+  refs.gallery.innerHTML = '';
+  form.reset();
+
+  fetchImages(inputValue)
+    .then(renderGallery)
+    .catch(error => console.log(error));
+}
