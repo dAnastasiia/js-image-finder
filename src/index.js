@@ -1,26 +1,43 @@
 import './styles.css';
 import refs from './js/refs';
-import fetchImages from './js/fetch-images';
+import imageService from './js/image-service';
 import renderGallery from './js/render-gallery';
 
-// let page = 1;
-// let perPage = 12;
+refs.searchForm.addEventListener('submit', onSearch);
+refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-refs.searchForm.addEventListener('submit', onSubmit);
-
-function onSubmit(e) {
+function onSearch(e) {
   e.preventDefault();
   const form = e.currentTarget;
-  const inputValue = form.elements.query.value;
+  imageService.query = form.elements.query.value;
 
-  if (!inputValue) {
+  if (!imageService.searchQuery) {
     return;
   }
 
   refs.gallery.innerHTML = '';
   form.reset();
+  imageService.resetPage();
+  fetchImages();
+}
 
-  fetchImages(inputValue)
-    .then(renderGallery)
+function onLoadMore(e) {
+  e.preventDefault();
+  fetchImages();
+}
+
+function fetchImages() {
+  refs.loadMoreBtn.classList.add('is-hidden');
+  imageService
+    .fetchImages()
+    .then(images => {
+      renderGallery(images);
+      refs.loadMoreBtn.classList.remove('is-hidden');
+
+      window.scrollTo({
+        top: document.documentElement.offsetHeight,
+        behavior: 'smooth',
+      });
+    })
     .catch(error => console.log(error));
 }
