@@ -1,11 +1,13 @@
 import './styles.css';
 import refs from './js/refs';
+import onClickImage from './js/modal';
 import imageService from './js/image-service';
 import loadMoreBtn from './js/loadMoreBtn';
 import renderGallery from './js/render-gallery';
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+refs.gallery.addEventListener('click', onClickImage);
 
 function onSearch(e) {
   e.preventDefault();
