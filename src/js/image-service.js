@@ -5,7 +5,7 @@ export default {
   page: 1,
 
   fetchImages() {
-    const url = `${this.baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=4&key=${this.apiKey}`;
+    const url = `${this.baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=12&key=${this.apiKey}`;
 
     return fetch(url)
       .then(res => res.json())

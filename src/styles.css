@@ -16,7 +16,7 @@ body {
 
 .search-form {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .form-input {
@@ -60,17 +60,27 @@ body {
   justify-content: space-between;
 }
 
+.stats-item {
+  display: inline-flex;
+  margin: 8px 0;
+  align-items: center;
+}
+
+.material-icons {
+  margin-right: 5px;
+}
+
 .btn {
   margin-left: 20px;
   display: inline-flex;
-  padding: 10px 32px;
+  padding: 5px 30px;
   min-width: 50px;
   max-height: 40px;
   border: 1px solid transparent;
   border-radius: 4px;
   align-items: center;
   color: #fff;
-  background-color: #2196f3;
+  background-color: #0d6efd;
   text-decoration: none;
   font-family: Roboto, sans-serif;
   font-weight: 700;
@@ -79,12 +89,16 @@ body {
   letter-spacing: 0.06em;
 }
 
-.btn-load-more {
+.btn-primary {
   display: flex;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.spinner {
+  margin-right: 8px;
 }
 
 .is-hidden {

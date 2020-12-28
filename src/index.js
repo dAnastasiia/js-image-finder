@@ -1,6 +1,7 @@
 import './styles.css';
 import refs from './js/refs';
 import imageService from './js/image-service';
+import loadMoreBtn from './js/loadMoreBtn';
 import renderGallery from './js/render-gallery';
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -15,10 +16,10 @@ function onSearch(e) {
     return;
   }
 
-  refs.gallery.innerHTML = '';
-  form.reset();
+  clearGallery();
   imageService.resetPage();
   fetchImages();
+  form.reset();
 }
 
 function onLoadMore(e) {
@@ -27,12 +28,14 @@ function onLoadMore(e) {
 }
 
 function fetchImages() {
-  refs.loadMoreBtn.classList.add('is-hidden');
+  loadMoreBtn.show();
+  loadMoreBtn.enable();
+
   imageService
     .fetchImages()
     .then(images => {
       renderGallery(images);
-      refs.loadMoreBtn.classList.remove('is-hidden');
+      loadMoreBtn.disable();
 
       window.scrollTo({
         top: document.documentElement.offsetHeight,
@@ -40,4 +43,8 @@ function fetchImages() {
       });
     })
     .catch(error => console.log(error));
+}
+
+function clearGallery() {
+  refs.gallery.innerHTML = '';
 }
