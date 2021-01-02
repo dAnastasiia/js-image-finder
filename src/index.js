@@ -39,6 +39,11 @@ function fetchImages() {
       renderGallery(images);
       loadMoreBtn.disable();
 
+      if (images.length < 12) {
+        loadMoreBtn.hide();
+        console.log(images.length);
+      }
+
       window.scrollTo({
         top: document.documentElement.offsetHeight,
         behavior: 'smooth',

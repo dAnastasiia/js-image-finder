@@ -7,6 +7,10 @@ export default {
     loadMoreBtn.classList.remove('is-hidden');
   },
 
+  hide() {
+    loadMoreBtn.classList.add('is-hidden');
+  },
+
   enable() {
     loadMoreBtn.disabled = true;
     loadMoreBtnLabel.textContent = 'Loading';
